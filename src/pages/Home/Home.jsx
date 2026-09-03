@@ -1,10 +1,14 @@
 import Header from "../../components/Header/Header";
+import Gallery from "../../components/Gallery/Gallery";
+import "./Home.css";
 
 const Home = () => {
   return (
     <div>
       <Header />
-      <main>Home page</main>
+      <main className="home">
+        <Gallery />
+      </main>
     </div>
   );
 };
