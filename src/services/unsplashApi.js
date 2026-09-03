@@ -30,6 +30,8 @@ export const getPhotos = async ({ page = 1, perPage = 20, signal } = {}) => {
     .map((photo) => ({
       id: photo.id,
       photo_url: photo.urls?.regular || photo.urls?.small || "",
+      width: photo.width,
+      height: photo.height,
       caption:
         photo.alt_description ||
         photo.description ||

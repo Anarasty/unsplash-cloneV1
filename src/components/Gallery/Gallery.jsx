@@ -3,7 +3,7 @@ import ImgCard from "../ImgCard/ImgCard";
 import { getPhotos } from "../../services/unsplashApi";
 import "./Gallery.css";
 
-const Gallery = () => {
+const Gallery = ({ columns = 3 }) => {
   const [photos, setPhotos] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
@@ -49,7 +49,7 @@ const Gallery = () => {
 
   return (
     <section className="gallery">
-      <div className="gallery__grid">
+      <div className={`gallery__grid gallery__grid--${columns}`}>
         {photos.map((photo) => (
           <ImgCard key={photo.id} photo={photo} />
         ))}

@@ -6,6 +6,7 @@ const Button = ({
   onClick,
   disabled = false,
   className = "",
+  ...restProps
 }) => {
   const buttonClassName = `btn ${className}`.trim();
 
@@ -15,6 +16,7 @@ const Button = ({
       onClick={onClick}
       disabled={disabled}
       className={buttonClassName}
+      {...restProps}
     >
       {children}
     </button>
