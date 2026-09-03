@@ -1,12 +1,22 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Dice3, Dice5 } from "lucide-react";
 import Button from "../../components/Button/Button";
 import Header from "../../components/Header/Header";
 import Gallery from "../../components/Gallery/Gallery";
+import Pagination from "../../components/Pagination/Pagination";
 import "./Home.css";
 
 const Home = () => {
   const [galleryColumns, setGalleryColumns] = useState(3);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [paginationLinks, setPaginationLinks] = useState({});
+  const handlePaginationChange = useCallback((links) => {
+    setPaginationLinks((currentLinks) => ({
+      ...links,
+      first: links.first ?? currentLinks.first ?? 1,
+      last: links.last ?? currentLinks.last,
+    }));
+  }, []);
 
   return (
     <div>
@@ -32,9 +42,19 @@ const Home = () => {
               </Button>
             </div>
           </div>
+
+          <Pagination
+            currentPage={currentPage}
+            links={paginationLinks}
+            onPageChange={setCurrentPage}
+          />
         </section>
 
-        <Gallery columns={galleryColumns} />
+        <Gallery
+          columns={galleryColumns}
+          page={currentPage}
+          onPaginationChange={handlePaginationChange}
+        />
       </main>
     </div>
   );

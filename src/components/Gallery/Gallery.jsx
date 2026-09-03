@@ -3,41 +3,45 @@ import ImgCard from "../ImgCard/ImgCard";
 import { getPhotos } from "../../services/unsplashApi";
 import "./Gallery.css";
 
-const Gallery = ({ columns = 3 }) => {
+const Gallery = ({ columns = 3, page = 1, onPaginationChange }) => {
   const [photos, setPhotos] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const controller = new AbortController();
+    let isCurrentRequest = true;
 
     const loadPhotos = async () => {
       try {
         setIsLoading(true);
         setError("");
 
-        const data = await getPhotos({
-          page: 1,
-          perPage: 20,
-          signal: controller.signal,
+        const { photos: galleryPhotos, pagination } = await getPhotos({
+          page,
+          perPage: 30,
         });
 
-        setPhotos(data);
+        if (isCurrentRequest) {
+          setPhotos(galleryPhotos);
+          onPaginationChange?.(pagination);
+        }
       } catch (fetchError) {
-        if (fetchError.name !== "AbortError") {
+        if (isCurrentRequest) {
           setError(fetchError.message || "Could not load gallery images right now.");
         }
       } finally {
-        setIsLoading(false);
+        if (isCurrentRequest) {
+          setIsLoading(false);
+        }
       }
     };
 
     loadPhotos();
 
     return () => {
-      controller.abort();
+      isCurrentRequest = false;
     };
-  }, []);
+  }, [onPaginationChange, page]);
 
   if (isLoading) {
     return <section className="gallery">Loading gallery...</section>;
