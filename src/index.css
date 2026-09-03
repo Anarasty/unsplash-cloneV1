@@ -8,6 +8,20 @@ body {
   font-family: Arial, sans-serif;
 }
 
+#root {
+  min-height: 100vh;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app__content {
+  flex: 1;
+}
+
 button,
 input,
 textarea,

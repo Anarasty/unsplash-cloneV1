@@ -5,16 +5,27 @@
   break-inside: avoid;
 }
 
+.img-card__media {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  min-height: 220px;
+  background-color: #ececec;
+}
+
+.img-card__loader {
+  position: absolute;
+  inset: 0;
+}
+
 .img-card__image {
   display: block;
   width: 100%;
   border-radius: 12px;
-  background-color: #ececec;
+  opacity: 1;
+  transition: opacity 0.25s ease;
 }
 
-.img-card__caption {
-  margin-top: 8px;
-  color: #222222;
-  font-size: 14px;
-  line-height: 1.35;
+.img-card__image--hidden {
+  opacity: 0;
 }

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import ImgCard from "../ImgCard/ImgCard";
+import { getPhotos } from "../../services/unsplashApi";
 import "./Gallery.css";
 
 const Gallery = () => {
@@ -15,19 +16,16 @@ const Gallery = () => {
         setIsLoading(true);
         setError("");
 
-        const response = await fetch("https://jsonfakery.com/photos", {
+        const data = await getPhotos({
+          page: 1,
+          perPage: 20,
           signal: controller.signal,
         });
 
-        if (!response.ok) {
-          throw new Error("Failed to load photos");
-        }
-
-        const data = await response.json();
-        setPhotos(Array.isArray(data) ? data.slice(0, 20) : []);
+        setPhotos(data);
       } catch (fetchError) {
         if (fetchError.name !== "AbortError") {
-          setError("Could not load gallery images right now.");
+          setError(fetchError.message || "Could not load gallery images right now.");
         }
       } finally {
         setIsLoading(false);
