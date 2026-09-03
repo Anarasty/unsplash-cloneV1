@@ -1,10 +1,13 @@
-import "./App.css";
+import { Route, Routes } from "react-router";
+import Home from "./pages/Home/Home";
+import ImgSolo from "./pages/ImgSolo/ImgSolo";
 
 function App() {
   return (
-    <>
-      <h1>START</h1>
-    </>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/img-solo" element={<ImgSolo />} />
+    </Routes>
   );
 }
 
