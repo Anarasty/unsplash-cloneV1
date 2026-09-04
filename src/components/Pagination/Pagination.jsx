@@ -1,13 +1,11 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Button from "../Button/Button";
+import { getPaginationPages } from "../../services/pagination";
 import "./Pagination.css";
 
 const Pagination = ({ currentPage, links = {}, onPageChange }) => {
-  const firstPage = links.first ?? 1;
   const lastPage = links.last;
-  const pageNumbers = [firstPage, firstPage + 1, firstPage + 2].filter(
-    (page) => !lastPage || page < lastPage,
-  );
+  const pageNumbers = getPaginationPages(links);
   const goToPage = (page) => () => onPageChange?.(page);
 
   return (

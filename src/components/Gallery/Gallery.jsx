@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import ImgCard from "../ImgCard/ImgCard";
 import { getPhotos } from "../../services/unsplashApi";
+import { searchPhotos } from "../../services/search";
 import "./Gallery.css";
 
-const Gallery = ({ columns = 3, page = 1, onPaginationChange }) => {
+const Gallery = ({ columns = 3, page = 1, query = "", onPaginationChange }) => {
   const [photos, setPhotos] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
@@ -16,7 +17,9 @@ const Gallery = ({ columns = 3, page = 1, onPaginationChange }) => {
         setIsLoading(true);
         setError("");
 
-        const { photos: galleryPhotos, pagination } = await getPhotos({
+        const loadGallery = query ? searchPhotos : getPhotos;
+        const { photos: galleryPhotos, pagination } = await loadGallery({
+          query,
           page,
           perPage: 30,
         });
@@ -41,7 +44,7 @@ const Gallery = ({ columns = 3, page = 1, onPaginationChange }) => {
     return () => {
       isCurrentRequest = false;
     };
-  }, [onPaginationChange, page]);
+  }, [onPaginationChange, page, query]);
 
   if (isLoading) {
     return <section className="gallery">Loading gallery...</section>;
@@ -49,6 +52,10 @@ const Gallery = ({ columns = 3, page = 1, onPaginationChange }) => {
 
   if (error) {
     return <section className="gallery">{error}</section>;
+  }
+
+  if (query && photos.length === 0) {
+    return <section className="gallery">No photos found for “{query}”.</section>;
   }
 
   return (

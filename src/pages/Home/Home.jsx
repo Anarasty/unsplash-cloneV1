@@ -9,6 +9,7 @@ import "./Home.css";
 const Home = () => {
   const [galleryColumns, setGalleryColumns] = useState(3);
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState("");
   const [paginationLinks, setPaginationLinks] = useState({});
   const handlePaginationChange = useCallback((links) => {
     setPaginationLinks((currentLinks) => ({
@@ -17,10 +18,15 @@ const Home = () => {
       last: links.last ?? currentLinks.last,
     }));
   }, []);
+  const handleSearch = useCallback((query) => {
+    setSearchQuery(query);
+    setCurrentPage(1);
+    setPaginationLinks({});
+  }, []);
 
   return (
     <div>
-      <Header />
+      <Header onSearch={handleSearch} />
       <main className="home">
         <section className="home__gallery-toolbar">
           <div className="home__gallery-toolbar-left">
@@ -53,6 +59,7 @@ const Home = () => {
         <Gallery
           columns={galleryColumns}
           page={currentPage}
+          query={searchQuery}
           onPaginationChange={handlePaginationChange}
         />
       </main>

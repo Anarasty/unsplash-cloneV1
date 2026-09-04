@@ -3,7 +3,7 @@ import Button from "../Button/Button";
 import SearchBar from "../SearchBar/SearchBar";
 import "./Header.css";
 
-const Header = () => {
+const Header = ({ onSearch }) => {
   return (
     <header className="header">
       <Link to="/" className="header__logo">
@@ -11,7 +11,7 @@ const Header = () => {
       </Link>
 
       <div className="header__search">
-        <SearchBar />
+        <SearchBar onSearch={onSearch} />
       </div>
 
       <div className="header__actions">
