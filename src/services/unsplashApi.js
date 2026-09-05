@@ -28,6 +28,7 @@ export const getPhotos = ({ page = 1, perPage = 20 } = {}) => {
 
     const data = await response.json();
     const photos = Array.isArray(data) ? data : [];
+    const pagination = getPaginationLinks(response.headers.get("Link"));
 
     return {
       photos: photos
@@ -44,7 +45,8 @@ export const getPhotos = ({ page = 1, perPage = 20 } = {}) => {
           updated_at: photo.updated_at,
         }))
         .filter((photo) => Boolean(photo.photo_url)),
-      pagination: getPaginationLinks(response.headers.get("Link")),
+      pagination,
+      page,
     };
   });
 

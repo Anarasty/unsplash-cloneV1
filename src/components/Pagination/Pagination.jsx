@@ -4,7 +4,6 @@ import { getPaginationPages } from "../../services/pagination";
 import "./Pagination.css";
 
 const Pagination = ({ currentPage, links = {}, onPageChange }) => {
-  const lastPage = links.last;
   const pageNumbers = getPaginationPages(links);
   const goToPage = (page) => () => onPageChange?.(page);
 
@@ -32,14 +31,16 @@ const Pagination = ({ currentPage, links = {}, onPageChange }) => {
         </Button>
       ))}
 
-      <Button
-        className="pagination__button pagination__button--last"
-        onClick={goToPage(lastPage)}
-        disabled={!lastPage || currentPage === lastPage}
-        aria-current={currentPage === lastPage ? "page" : undefined}
-      >
-        Last
-      </Button>
+      {currentPage > 3 && (
+        <Button
+          className="pagination__button pagination__button--active"
+          disabled
+          aria-label={`Current page: ${currentPage}`}
+          aria-current="page"
+        >
+          ...
+        </Button>
+      )}
 
       <Button
         className="pagination__button pagination__button--icon"

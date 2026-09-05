@@ -15,6 +15,10 @@ const Home = () => {
   const [paginationLinks, setPaginationLinks] = useState({});
   const searchQuery = tag;
   const handlePaginationChange = useCallback((links) => {
+    if (Number.isInteger(links.current) && links.current > 0) {
+      setCurrentPage(links.current);
+    }
+
     setPaginationLinks((currentLinks) => ({
       ...links,
       first: links.first ?? currentLinks.first ?? 1,

@@ -19,7 +19,11 @@ const Gallery = ({ columns = 3, page = 1, query = "", onPaginationChange }) => {
         setError("");
 
         const loadGallery = query ? searchPhotos : getPhotos;
-        const { photos: galleryPhotos, pagination } = await loadGallery({
+        const {
+          photos: galleryPhotos,
+          pagination,
+          page: resolvedPage = page,
+        } = await loadGallery({
           query,
           page,
           perPage: query ? 10 : 30,
@@ -27,7 +31,7 @@ const Gallery = ({ columns = 3, page = 1, query = "", onPaginationChange }) => {
 
         if (isCurrentRequest) {
           setPhotos(galleryPhotos);
-          onPaginationChange?.(pagination);
+          onPaginationChange?.({ ...pagination, current: resolvedPage });
         }
       } catch (fetchError) {
         if (isCurrentRequest) {
