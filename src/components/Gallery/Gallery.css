@@ -3,6 +3,13 @@
   padding: 16px 20px 24px;
 }
 
+.gallery--loading {
+  display: flex;
+  min-height: 50vh;
+  align-items: center;
+  justify-content: center;
+}
+
 .gallery__grid {
   column-gap: 16px;
 }

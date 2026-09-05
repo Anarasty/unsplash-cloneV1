@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import ImgCard from "../ImgCard/ImgCard";
 import { getPhotos } from "../../services/unsplashApi";
 import { searchPhotos } from "../../services/search";
+import Loader from "../Loader/Loader";
 import "./Gallery.css";
 
 const Gallery = ({ columns = 3, page = 1, query = "", onPaginationChange }) => {
@@ -47,7 +48,11 @@ const Gallery = ({ columns = 3, page = 1, query = "", onPaginationChange }) => {
   }, [onPaginationChange, page, query]);
 
   if (isLoading) {
-    return <section className="gallery">Loading gallery...</section>;
+    return (
+      <section className="gallery gallery--loading">
+        <Loader label="Loading gallery" />
+      </section>
+    );
   }
 
   if (error) {

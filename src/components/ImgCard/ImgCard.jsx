@@ -22,7 +22,9 @@ const ImgCard = ({ photo }) => {
         aria-label={`View ${caption}`}
       >
         <div className="img-card__media" style={{ aspectRatio: `${width} / ${height}` }}>
-          {isImageLoading && <Loader className="img-card__loader" />}
+          {isImageLoading && (
+            <Loader className="img-card__loader" label={`Loading ${caption}`} />
+          )}
 
           <img
             className={`img-card__image ${isImageLoading ? "img-card__image--hidden" : ""}`}

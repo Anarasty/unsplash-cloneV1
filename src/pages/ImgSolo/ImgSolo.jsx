@@ -13,6 +13,7 @@ const ImgSolo = () => {
   const { photoId } = useParams();
   const [photo, setPhoto] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isImageLoading, setIsImageLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -21,6 +22,7 @@ const ImgSolo = () => {
     const loadPhoto = async () => {
       try {
         setIsLoading(true);
+        setIsImageLoading(true);
         setError("");
         const selectedPhoto = await getPhoto(photoId);
 
@@ -51,8 +53,7 @@ const ImgSolo = () => {
       <main className="img-solo">
         {isLoading && (
           <div className="img-solo__status">
-            <Loader />
-            <span>Loading photo...</span>
+            <Loader label="Loading photo" />
           </div>
         )}
 
@@ -68,10 +69,15 @@ const ImgSolo = () => {
         {!isLoading && photo && (
           <article className="img-solo__layout">
             <div className="img-solo__media">
+              {isImageLoading && (
+                <Loader className="img-solo__image-loader" label="Loading image" />
+              )}
               <img
-                className="img-solo__image"
+                className={`img-solo__image ${isImageLoading ? "img-solo__image--hidden" : ""}`}
                 src={photo.photo_url}
                 alt={photo.title}
+                onLoad={() => setIsImageLoading(false)}
+                onError={() => setIsImageLoading(false)}
               />
             </div>
 
@@ -103,6 +109,20 @@ const ImgSolo = () => {
               </div>
 
               <p className="img-solo__description">{photo.description}</p>
+
+              {photo.tags.length > 0 && (
+                <nav className="img-solo__tags" aria-label="Photo tags">
+                  {photo.tags.map((tag) => (
+                    <Link
+                      key={tag}
+                      to={`/tags/${encodeURIComponent(tag)}`}
+                      className="img-solo__tag"
+                    >
+                      #{tag}
+                    </Link>
+                  ))}
+                </nav>
+              )}
 
               <section className="img-solo__author" aria-labelledby="photo-author">
                 <p className="img-solo__eyebrow">Photographer</p>

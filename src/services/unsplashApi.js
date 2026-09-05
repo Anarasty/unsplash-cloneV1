@@ -117,6 +117,13 @@ export const getPhoto = (photoId) => {
       downloads: photo.downloads ?? 0,
       likes: photo.likes ?? 0,
       views: photo.views ?? 0,
+      tags: [
+        ...new Set(
+          (photo.tags || [])
+            .map((tag) => tag?.title?.trim())
+            .filter(Boolean),
+        ),
+      ],
       author: {
         name: photo.user?.name || "Unknown author",
         username: photo.user?.username || "",

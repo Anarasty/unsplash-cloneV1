@@ -1,5 +1,6 @@
 import { useCallback, useState } from "react";
 import { Dice3, Dice5 } from "lucide-react";
+import { useNavigate, useParams } from "react-router";
 import Button from "../../components/Button/Button";
 import Header from "../../components/Header/Header";
 import Gallery from "../../components/Gallery/Gallery";
@@ -7,10 +8,12 @@ import Pagination from "../../components/Pagination/Pagination";
 import "./Home.css";
 
 const Home = () => {
+  const { tag = "" } = useParams();
+  const navigate = useNavigate();
   const [galleryColumns, setGalleryColumns] = useState(3);
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchQuery, setSearchQuery] = useState("");
   const [paginationLinks, setPaginationLinks] = useState({});
+  const searchQuery = tag;
   const handlePaginationChange = useCallback((links) => {
     setPaginationLinks((currentLinks) => ({
       ...links,
@@ -18,15 +21,18 @@ const Home = () => {
       last: links.last ?? currentLinks.last,
     }));
   }, []);
-  const handleSearch = useCallback((query) => {
-    setSearchQuery(query);
-    setCurrentPage(1);
-    setPaginationLinks({});
-  }, []);
+  const handleSearch = useCallback(
+    (query) => {
+      setCurrentPage(1);
+      setPaginationLinks({});
+      navigate(query ? `/tags/${encodeURIComponent(query)}` : "/");
+    },
+    [navigate],
+  );
 
   return (
     <div>
-      <Header onSearch={handleSearch} />
+      <Header initialQuery={searchQuery} onSearch={handleSearch} />
       <main className="home">
         <section className="home__gallery-toolbar">
           <div className="home__gallery-toolbar-left">

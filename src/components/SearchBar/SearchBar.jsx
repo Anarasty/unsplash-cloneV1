@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Search, X } from "lucide-react";
 import "./SearchBar.css";
 
-const SearchBar = ({ onSearch }) => {
-  const [query, setQuery] = useState("");
+const SearchBar = ({ initialQuery = "", onSearch }) => {
+  const [query, setQuery] = useState(initialQuery);
 
   const handleSubmit = (event) => {
     event.preventDefault();

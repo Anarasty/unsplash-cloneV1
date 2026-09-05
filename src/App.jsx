@@ -9,6 +9,7 @@ function App() {
       <div className="app__content">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/tags/:tag" element={<Home />} />
           <Route path="/photos/:photoId" element={<ImgSolo />} />
         </Routes>
       </div>
