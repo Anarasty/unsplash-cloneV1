@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import useAuth from "../../hooks/useAuth";
 import Button from "../Button/Button";
 import SearchBar from "../SearchBar/SearchBar";
@@ -6,6 +6,16 @@ import "./Header.css";
 
 const Header = ({ initialQuery = "", onSearch }) => {
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSearch = (query) => {
+    if (onSearch) {
+      onSearch(query);
+      return;
+    }
+
+    navigate(query ? `/tags/${encodeURIComponent(query)}` : "/");
+  };
 
   return (
     <header className="header">
@@ -17,7 +27,7 @@ const Header = ({ initialQuery = "", onSearch }) => {
         <SearchBar
           key={initialQuery}
           initialQuery={initialQuery}
-          onSearch={onSearch}
+          onSearch={handleSearch}
         />
       </div>
 
