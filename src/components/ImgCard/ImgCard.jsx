@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router";
 import Loader from "../Loader/Loader";
 import "./ImgCard.css";
 
@@ -15,18 +16,24 @@ const ImgCard = ({ photo }) => {
 
   return (
     <article className="img-card">
-      <div className="img-card__media" style={{ aspectRatio: `${width} / ${height}` }}>
-        {isImageLoading && <Loader className="img-card__loader" />}
+      <Link
+        to={`/photos/${photo.id}`}
+        className="img-card__link"
+        aria-label={`View ${caption}`}
+      >
+        <div className="img-card__media" style={{ aspectRatio: `${width} / ${height}` }}>
+          {isImageLoading && <Loader className="img-card__loader" />}
 
-        <img
-          className={`img-card__image ${isImageLoading ? "img-card__image--hidden" : ""}`}
-          src={imageUrl}
-          alt={caption}
-          loading="lazy"
-          onLoad={handleImageLoaded}
-          onError={handleImageLoaded}
-        />
-      </div>
+          <img
+            className={`img-card__image ${isImageLoading ? "img-card__image--hidden" : ""}`}
+            src={imageUrl}
+            alt={caption}
+            loading="lazy"
+            onLoad={handleImageLoaded}
+            onError={handleImageLoaded}
+          />
+        </div>
+      </Link>
     </article>
   );
 };

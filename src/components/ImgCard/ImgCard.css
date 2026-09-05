@@ -5,6 +5,18 @@
   break-inside: avoid;
 }
 
+.img-card__link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.img-card__link:focus-visible {
+  outline: 3px solid #111111;
+  outline-offset: 3px;
+  border-radius: 12px;
+}
+
 .img-card__media {
   position: relative;
   overflow: hidden;
@@ -25,7 +37,13 @@
   border-radius: 12px;
   object-fit: cover;
   opacity: 1;
-  transition: opacity 0.25s ease;
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+.img-card__link:hover .img-card__image {
+  transform: scale(1.02);
 }
 
 .img-card__image--hidden {

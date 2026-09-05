@@ -9,7 +9,7 @@ function App() {
       <div className="app__content">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/img-solo" element={<ImgSolo />} />
+          <Route path="/photos/:photoId" element={<ImgSolo />} />
         </Routes>
       </div>
 
