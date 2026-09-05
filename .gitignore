@@ -10,6 +10,7 @@ lerna-debug.log*
 .env
 .env.local
 .env.*.local
+SKILLS.md
 
 node_modules
 dist

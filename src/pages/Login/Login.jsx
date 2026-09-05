@@ -110,11 +110,11 @@ const Login = () => {
         </form>
 
         <p className="login__notice">
-          Demo login: any non-empty credentials will work.
+          Demo login: any non-empty credentials will work
         </p>
       </section>
     </main>
   );
 };
 
-export default Login
+export default Login;

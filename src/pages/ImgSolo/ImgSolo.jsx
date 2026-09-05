@@ -70,7 +70,10 @@ const ImgSolo = () => {
           <article className="img-solo__layout">
             <div className="img-solo__media">
               {isImageLoading && (
-                <Loader className="img-solo__image-loader" label="Loading image" />
+                <Loader
+                  className="img-solo__image-loader"
+                  label="Loading image"
+                />
               )}
               <img
                 className={`img-solo__image ${isImageLoading ? "img-solo__image--hidden" : ""}`}
@@ -124,7 +127,10 @@ const ImgSolo = () => {
                 </nav>
               )}
 
-              <section className="img-solo__author" aria-labelledby="photo-author">
+              <section
+                className="img-solo__author"
+                aria-labelledby="photo-author"
+              >
                 <p className="img-solo__eyebrow">Photographer</p>
                 <h2 id="photo-author" className="img-solo__author-name">
                   {photo.author.name}
@@ -139,7 +145,8 @@ const ImgSolo = () => {
                     target="_blank"
                     rel="noreferrer"
                   >
-                    {photo.author.social.platform}: @{photo.author.social.username}
+                    {photo.author.social.platform}: @
+                    {photo.author.social.username}
                   </a>
                 )}
               </section>

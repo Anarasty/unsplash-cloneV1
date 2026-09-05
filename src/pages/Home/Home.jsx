@@ -40,7 +40,11 @@ const Home = () => {
       <main className="home">
         <section className="home__gallery-toolbar">
           <div className="home__gallery-toolbar-left">
-            <div className="home__view-buttons" role="group" aria-label="Gallery view mode">
+            <div
+              className="home__view-buttons"
+              role="group"
+              aria-label="Gallery view mode"
+            >
               <Button
                 className={`home__view-button ${galleryColumns === 3 ? "home__view-button--active" : ""}`}
                 onClick={() => setGalleryColumns(3)}

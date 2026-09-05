@@ -14,7 +14,11 @@ const Header = ({ initialQuery = "", onSearch }) => {
       </Link>
 
       <div className="header__search">
-        <SearchBar key={initialQuery} initialQuery={initialQuery} onSearch={onSearch} />
+        <SearchBar
+          key={initialQuery}
+          initialQuery={initialQuery}
+          onSearch={onSearch}
+        />
       </div>
 
       <div className="header__actions">

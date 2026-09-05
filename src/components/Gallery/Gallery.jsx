@@ -35,7 +35,9 @@ const Gallery = ({ columns = 3, page = 1, query = "", onPaginationChange }) => {
         }
       } catch (fetchError) {
         if (isCurrentRequest) {
-          setError(fetchError.message || "Could not load gallery images right now.");
+          setError(
+            fetchError.message || "Could not load gallery images right now.",
+          );
         }
       } finally {
         if (isCurrentRequest) {
@@ -64,7 +66,9 @@ const Gallery = ({ columns = 3, page = 1, query = "", onPaginationChange }) => {
   }
 
   if (query && photos.length === 0) {
-    return <section className="gallery">No photos found for “{query}”.</section>;
+    return (
+      <section className="gallery">No photos found for “{query}”.</section>
+    );
   }
 
   return (
