@@ -1,16 +1,60 @@
-# React + Vite
+# Unsplash clone
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Deployment link
 
-Currently, two official plugins are available:
+[https://unsplash-clone-v1.vercel.app/](https://unsplash-clone-v1.vercel.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Run locally
 
-## React Compiler
+1. Clone the repository:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+   ```bash
+   git clone https://github.com/Anarasty/unsplash-cloneV1.git
+   cd unsplash-cloneV1
+   ```
 
-## Expanding the ESLint configuration
+2. Install the dependencies:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+   ```bash
+   npm install
+   ```
+
+3. Create a `.env` file in the project root and add your Unsplash Access Key:
+
+   ```env
+   VITE_UNSPLASH_ACCESS_KEY=your_unsplash_access_key
+   ```
+
+   You can create an Unsplash developer application and get an Access Key from
+   [Unsplash Developers](https://unsplash.com/developers).
+
+4. Start the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+5. Open the local URL displayed in the terminal, usually
+   [http://localhost:5173](http://localhost:5173).
+
+## Demo login
+
+Enter a name with up to 10 characters and a password containing 3–12 characters.
+Repeat the same password to sign in. This is a client-side demo authentication flow.
+
+## Production build
+
+Create and test a production build locally:
+
+```bash
+npm run lint
+npm run build
+npm run preview
+```
+
+The production files will be generated in the `dist` directory.
+
+## Environment variables on Vercel
+
+Add `VITE_UNSPLASH_ACCESS_KEY` under **Project Settings → Environment Variables**,
+enable it for Production, and redeploy the project.
