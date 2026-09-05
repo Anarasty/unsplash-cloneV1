@@ -30,6 +30,6 @@ export const getPaginationPages = (links = {}) => {
   const lastPage = links.last;
 
   return [firstPage, firstPage + 1, firstPage + 2].filter(
-    (page) => !lastPage || page < lastPage,
+    (page) => !lastPage || page <= lastPage,
   );
 };

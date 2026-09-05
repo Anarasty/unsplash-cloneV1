@@ -40,13 +40,14 @@ export const searchPhotos = ({ query, page = 1, perPage = 20 } = {}) => {
     const results = Array.isArray(data.results) ? data.results : [];
     const pagination = getPaginationLinks(response.headers.get("Link"));
 
-    // Unsplash also returns total_pages in the response body. Use it as a
-    // fallback so the controls remain complete if a Link header is unavailable.
+    // The response body is the authoritative source for the result count.
+    // Build the controls from it so a partial/missing Link header cannot leave
+    // stale or incorrect page targets behind.
     if (Number.isInteger(data.total_pages) && data.total_pages > 0) {
-      pagination.first ??= 1;
-      pagination.last ??= data.total_pages;
-      pagination.prev ??= page > 1 ? page - 1 : null;
-      pagination.next ??= page < data.total_pages ? page + 1 : null;
+      pagination.first = 1;
+      pagination.last = data.total_pages;
+      pagination.prev = page > 1 ? page - 1 : null;
+      pagination.next = page < data.total_pages ? page + 1 : null;
     }
 
     return {

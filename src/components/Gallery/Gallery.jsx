@@ -22,7 +22,7 @@ const Gallery = ({ columns = 3, page = 1, query = "", onPaginationChange }) => {
         const { photos: galleryPhotos, pagination } = await loadGallery({
           query,
           page,
-          perPage: 30,
+          perPage: query ? 10 : 30,
         });
 
         if (isCurrentRequest) {
